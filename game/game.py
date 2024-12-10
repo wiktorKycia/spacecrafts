@@ -1,19 +1,29 @@
+from typing import Tuple
 import pygame
 from game.rocket import Rocket, Vector2
 
 class Game:
-    def __init__(self):
+    def __init__(self, size:Tuple[int, int]=(800, 600), caption:str="game"):
+        """
+        Initializes the game window
+        :param size: size of the game window
+        :param caption: game window's title
+        """
         pygame.init()
-        self.screen = pygame.display.set_mode((800, 600))
-        pygame.display.set_caption("My Game")
+
+        self.screen = pygame.display.set_mode(size)
+        pygame.display.set_caption(caption)
+
         self.clock = pygame.time.Clock()
         self.is_running = True
         self.fps_max = 60
         self.dt = 0.0
 
+        # objects
         self.rocket = Rocket(400, 300)
 
     def run(self):
+        """main game loop"""
         while self.is_running:
             self.handle_events()
             self.update()
@@ -29,9 +39,11 @@ class Game:
                 self.is_running = False
 
     def update(self):
+        """Operations in executed every frame"""
         self.rocket.update(self.dt)
 
     def render(self):
+        """Render objects and interface on the screen"""
         self.screen.fill((0, 0, 0))
 
         speed_text = f"Speed: {self.rocket.vel.length():.2f}"
