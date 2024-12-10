@@ -1,3 +1,6 @@
+from collections.abc import Callable
+from functools import wraps
+
 import pygame
 from pygame.math import Vector2
 import math
@@ -62,6 +65,11 @@ class Rocket:
             self.power += 10 if self.power < 10000 else 0
         if pressed[pygame.K_DOWN]: # decreasing power
             self.power -= 10 if self.power > 0 else 0
+
+    def execute_if_triggered(self, condition: bool, func: Callable, *args, **kwargs):
+        if condition:
+            func(*args, **kwargs)
+
 
     def update(self, dt):
         """Updates the rocket's position and velocity"""

@@ -54,7 +54,7 @@ class Game:
         position_text = f"power: {self.rocket.power}"
         position_surface = speed_font.render(position_text, True, (255, 255, 255))
         self.screen.blit(position_surface, (10, 50))
-        print(self.rocket.vel.angle_to(Vector2(1, 0)), self.rocket.angle)
+        # print(self.rocket.vel.angle_to(Vector2(1, 0)), self.rocket.angle)
         self.rocket.render(self.screen)
 
         pygame.display.flip()
